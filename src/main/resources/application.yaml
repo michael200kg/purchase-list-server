@@ -1,0 +1,49 @@
+
+server:
+  port: 8888
+  address: 0.0.0.0
+  servlet:
+    context-path: /
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  data:
+    jpa:
+      repositories:
+        enabled: true
+        bootstrap-mode: default
+  datasource:
+    url: jdbc:mysql://localhost:3306/db?useUnicode=true&serverTimezone=UTC
+    username: purchase
+    password: purchase1
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 5
+  jpa:
+    show-sql: false
+    hibernate:
+      naming:
+        physical-strategy: com.michael200kg.purchaseserver.configuration.CamelCaseToSnakeCaseNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+      ddl-auto: none
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        dialect: org.hibernate.dialect.Oracle10gDialect
+        show_sql: false
+        format_sql: false
+        jdbc:
+          time_zone = UTC
+        event:
+          merge:
+            entity_copy_observer: allow
+    generate-ddl: false
+  mvc:
+    favicon:
+      enabled: false
+    dispatch-options-request: true
+    #date-format: yyyy-MM-dd'T'HH:mm:ssZ
+  jackson:
+    time-zone: Europe/Moscow

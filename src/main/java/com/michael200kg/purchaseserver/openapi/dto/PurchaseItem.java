@@ -14,13 +14,16 @@ import javax.validation.constraints.*;
 /**
  * PurchaseItem
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-06-05T14:03:24.108+03:00[Europe/Moscow]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-06-08T12:40:22.532+03:00[Europe/Moscow]")
 
 public class PurchaseItem  implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @JsonProperty("id")
   private Integer id;
+
+  @JsonProperty("purchaseId")
+  private Integer purchaseId;
 
   @JsonProperty("checked")
   private Boolean checked;
@@ -52,6 +55,26 @@ public class PurchaseItem  implements Serializable {
 
   public void setId(Integer id) {
     this.id = id;
+  }
+
+  public PurchaseItem purchaseId(Integer purchaseId) {
+    this.purchaseId = purchaseId;
+    return this;
+  }
+
+  /**
+   * Get purchaseId
+   * @return purchaseId
+  */
+  @ApiModelProperty(value = "")
+
+
+  public Integer getPurchaseId() {
+    return purchaseId;
+  }
+
+  public void setPurchaseId(Integer purchaseId) {
+    this.purchaseId = purchaseId;
   }
 
   public PurchaseItem checked(Boolean checked) {
@@ -146,6 +169,7 @@ public class PurchaseItem  implements Serializable {
     }
     PurchaseItem purchaseItem = (PurchaseItem) o;
     return Objects.equals(this.id, purchaseItem.id) &&
+        Objects.equals(this.purchaseId, purchaseItem.purchaseId) &&
         Objects.equals(this.checked, purchaseItem.checked) &&
         Objects.equals(this.checkedDate, purchaseItem.checkedDate) &&
         Objects.equals(this.itemName, purchaseItem.itemName) &&
@@ -154,7 +178,7 @@ public class PurchaseItem  implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, checked, checkedDate, itemName, itemDescription);
+    return Objects.hash(id, purchaseId, checked, checkedDate, itemName, itemDescription);
   }
 
   @Override
@@ -163,6 +187,7 @@ public class PurchaseItem  implements Serializable {
     sb.append("class PurchaseItem {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    purchaseId: ").append(toIndentedString(purchaseId)).append("\n");
     sb.append("    checked: ").append(toIndentedString(checked)).append("\n");
     sb.append("    checkedDate: ").append(toIndentedString(checkedDate)).append("\n");
     sb.append("    itemName: ").append(toIndentedString(itemName)).append("\n");
