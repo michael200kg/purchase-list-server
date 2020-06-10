@@ -26,7 +26,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-06-08T12:40:22.532+03:00[Europe/Moscow]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-06-09T14:42:48.507+03:00[Europe/Moscow]")
 
 @Validated
 @Api(value = "Purchase", description = "the Purchase API")
@@ -36,10 +36,76 @@ public interface PurchaseApi {
         return Optional.empty();
     }
 
-    @ApiOperation(value = "Returns a list of purchases.", nickname = "getPurchases", notes = "Optional extended description in CommonMark or HTML.", response = Purchase.class, responseContainer = "List", tags={ "Purchase", })
+    @ApiOperation(value = "Creates new Purchase", nickname = "createPurchase", notes = "", response = Purchase.class, tags={ "Purchase", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "A JSON array of user names", response = Purchase.class, responseContainer = "List") })
-    @RequestMapping(value = "/purchases",
+        @ApiResponse(code = 200, message = "Created Purchase", response = Purchase.class) })
+    @RequestMapping(value = "/purchase",
+        produces = { "application/json" }, 
+        consumes = { "application/json" },
+        method = RequestMethod.POST)
+    default ResponseEntity<Purchase> createPurchase(@ApiParam(value = "Purchase"  )  @Valid @RequestBody Purchase purchase) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"shared\" : true, \"createdDate\" : \"2000-01-23T04:56:07.000+00:00\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"sharedForUsername\" : \"sharedForUsername\", \"name\" : \"name\", \"checked\" : true, \"id\" : 0, \"text\" : \"text\", \"items\" : [ { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" }, { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" } ], \"username\" : \"username\" }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    @ApiOperation(value = "Deletes existing Purchase", nickname = "deletePurchase", notes = "", tags={ "Purchase", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Deleted Purchase") })
+    @RequestMapping(value = "/purchase/{purchaseId}",
+        method = RequestMethod.DELETE)
+    default ResponseEntity<Void> deletePurchase(@ApiParam(value = "Id of the Purchase",required=true) @PathVariable("purchaseId") Integer purchaseId) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    @ApiOperation(value = "Edits Purchase", nickname = "editPurchase", notes = "", tags={ "Purchase", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Edited Purchase") })
+    @RequestMapping(value = "/purchase",
+        consumes = { "application/json" },
+        method = RequestMethod.PUT)
+    default ResponseEntity<Void> editPurchase(@ApiParam(value = "Purchase"  )  @Valid @RequestBody Purchase purchase) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    @ApiOperation(value = "Get Purchase by id", nickname = "getPurchaseById", notes = "", response = Purchase.class, tags={ "Purchase", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Retrieved Purchase", response = Purchase.class) })
+    @RequestMapping(value = "/purchase/{purchaseId}",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    default ResponseEntity<Purchase> getPurchaseById(@ApiParam(value = "Id of the Purchase",required=true) @PathVariable("purchaseId") Integer purchaseId) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"shared\" : true, \"createdDate\" : \"2000-01-23T04:56:07.000+00:00\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"sharedForUsername\" : \"sharedForUsername\", \"name\" : \"name\", \"checked\" : true, \"id\" : 0, \"text\" : \"text\", \"items\" : [ { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" }, { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" } ], \"username\" : \"username\" }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    @ApiOperation(value = "Get list of all Purchases", nickname = "getPurchases", notes = "", response = Purchase.class, responseContainer = "List", tags={ "Purchase", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Retrieved list of all Purchases", response = Purchase.class, responseContainer = "List") })
+    @RequestMapping(value = "/purchase",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
     default ResponseEntity<List<Purchase>> getPurchases() {

@@ -15,15 +15,16 @@ spring:
         enabled: true
         bootstrap-mode: default
   datasource:
-    url: jdbc:mysql://localhost:3306/db?useUnicode=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: purchase
     password: purchase1
     hikari:
       connection-timeout: 60000
       maximum-pool-size: 5
   jpa:
-    show-sql: false
+    show-sql: true
     hibernate:
+      use-new-id-generator-mappings: false
       naming:
         physical-strategy: com.michael200kg.purchaseserver.configuration.CamelCaseToSnakeCaseNamingStrategy
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
@@ -31,7 +32,7 @@ spring:
     properties:
       hibernate:
         enable_lazy_load_no_trans: true
-        dialect: org.hibernate.dialect.Oracle10gDialect
+        dialect: org.hibernate.dialect.MySQL5Dialect
         show_sql: false
         format_sql: false
         jdbc:

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
@@ -15,17 +16,18 @@ import java.util.Set;
 @Data
 @Entity
 public class PurchaseEntity {
-  @Id
-  private Integer id;
-  private OffsetDateTime createdDate;
-  private Boolean checked;
-  private OffsetDateTime checkedDate;
-  private String name;
-  private String text;
-  private String username;
-  private Boolean shared;
-  private String sharedForUsername;
-  @OneToMany(mappedBy = "purchase")
-  private Set<PurchaseItemEntity> items = null;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private OffsetDateTime createdDate;
+    private Boolean checked;
+    private OffsetDateTime checkedDate;
+    private String name;
+    private String text;
+    private String username;
+    private Boolean shared;
+    private String sharedForUsername;
+    @OneToMany(mappedBy = "purchase")
+    private Set<PurchaseItemEntity> items = null;
 }
 
