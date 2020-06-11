@@ -5,6 +5,8 @@ import com.michael200kg.purchaseserver.openapi.dto.PurchaseItem;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import static java.util.Objects.nonNull;
+
 @Service
 public class PurchaseItemModelConverter implements ModelDtoBiConverter<PurchaseItem, PurchaseItemEntity> {
 

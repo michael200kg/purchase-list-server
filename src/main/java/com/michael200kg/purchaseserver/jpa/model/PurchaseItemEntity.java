@@ -18,8 +18,7 @@ public class PurchaseItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne
-    private PurchaseEntity purchase;
+    private Integer purchaseId;
     private Boolean checked;
     private OffsetDateTime checkedDate;
     private String itemName;

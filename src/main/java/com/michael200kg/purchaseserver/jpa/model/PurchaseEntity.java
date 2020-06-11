@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -27,7 +27,8 @@ public class PurchaseEntity {
     private String username;
     private Boolean shared;
     private String sharedForUsername;
-    @OneToMany(mappedBy = "purchase")
-    private Set<PurchaseItemEntity> items = null;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="purchaseId")
+    private Set<PurchaseItemEntity> items = new HashSet<>();
 }
 
