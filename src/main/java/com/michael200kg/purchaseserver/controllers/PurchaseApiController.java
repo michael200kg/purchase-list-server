@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import static com.michael200kg.purchaseserver.constants.ApplicationConstants.SERVICE_PATH_PREFIX;
+import static java.time.OffsetDateTime.now;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -39,13 +40,14 @@ public class PurchaseApiController implements PurchaseApi {
 
     @Override
     public ResponseEntity<List<Purchase>> getPurchases() {
-        List<PurchaseEntity> purchaseEntities = purchaseRepository.findAll();
+        List<PurchaseEntity> purchaseEntities = purchaseRepository.findAllByOrderByIdDesc();
         return new ResponseEntity<>(purchaseModelConverter.entityListToDtoList(purchaseEntities), OK);
     }
 
     @Override
     public ResponseEntity<Purchase> createPurchase(Purchase purchase) {
         PurchaseEntity entity = purchaseModelConverter.dtoToEntity(purchase);
+        entity.setCreatedDate(now());
         purchaseRepository.saveAndFlush(entity);
         return new ResponseEntity<>(purchaseModelConverter.entityToDto(entity), OK);
     }

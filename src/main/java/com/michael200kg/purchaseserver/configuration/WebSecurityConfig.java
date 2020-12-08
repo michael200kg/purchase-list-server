@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().configurationSource(corsConfigurationSource()).and()
                 .authorizeRequests()
                 .antMatchers("/actuator/**").permitAll() // DEBUG ONLY REMOVE IN PRODUCTION
-                .antMatchers("/service/v1/**").permitAll();
+                .antMatchers("/purchases/**").permitAll();
     }
 
     private CorsConfigurationSource corsConfigurationSource() {

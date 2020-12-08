@@ -47,7 +47,7 @@ public class CamelCaseToSnakeCaseNamingStrategy extends PhysicalNamingStrategySt
             String formattedName = name
                 .replaceAll("Entity", "")
                 .replaceAll(CAMEL_CASE_REGEX, SNAKE_CASE_PATTERN)
-                .toUpperCase();
+                .toLowerCase();
 
             return Identifier.toIdentifier(formattedName, identifier.isQuoted());
         } else {
