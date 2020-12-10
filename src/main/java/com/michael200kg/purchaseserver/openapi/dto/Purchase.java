@@ -17,7 +17,7 @@ import javax.validation.constraints.*;
 /**
  * Purchase
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-06-17T08:32:12.476+03:00[Europe/Moscow]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-12-10T00:58:51.890+03:00[Europe/Moscow]")
 
 public class Purchase  implements Serializable {
   private static final long serialVersionUID = 1L;
