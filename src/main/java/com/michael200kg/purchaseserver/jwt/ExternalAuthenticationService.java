@@ -22,7 +22,7 @@ public class ExternalAuthenticationService implements AuthService {
         try {
             password = authJdbcTemplate
                     .queryForObject(
-                            "SELECT password from User where USERNAME=?",
+                            "SELECT password from user where username=?",
                             String.class,
                             username
                     );
@@ -38,7 +38,7 @@ public class ExternalAuthenticationService implements AuthService {
         try {
             cnt_ = authJdbcTemplate
                     .queryForObject(
-                            "SELECT count(*) from User where USERNAME=?",
+                            "SELECT count(*) from user where username=?",
                             Integer.class,
                             username
                     );
@@ -52,7 +52,7 @@ public class ExternalAuthenticationService implements AuthService {
     public void createUser(String username, String password) throws UserAlreadyExistsException {
         try {
             this.authJdbcTemplate.update(
-                    "INSERT INTO USER (username, PASSWORD) values (?,?)",
+                    "insert into user (username, password) values (?,?)",
                     username,
                     password
             );
@@ -64,7 +64,7 @@ public class ExternalAuthenticationService implements AuthService {
     @Override
     public void updatePassword(String username, String newPassword) {
         this.authJdbcTemplate.update(
-                "UPDATE USER SET password = ? WHERE username = ?",
+                "update user set password = ? where username = ?",
                 newPassword,
                 username
         );

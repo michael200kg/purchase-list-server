@@ -24,6 +24,7 @@ sourceCompatibility = '1.8'
 
 def projectRootDir = 'C:\\Users\\Mikhail_Vershkov\\IdeaProjects\\purchase-list'
 def remoteServer = 'ec2-3-139-58-139.us-east-2.compute.amazonaws.com'
+def NPM_PATH = 'C:\\users\\Mikhail_Vershkov\\AppData\\Roaming\\npm\\';
 
 repositories {
     mavenCentral()
@@ -90,12 +91,19 @@ task deployJarToRemote {
             }
         }
     }
+}
 
-    task deployStaticToRemote {
-        ssh.settings {
-            knownHosts = allowAnyHosts
-        }
-        print projectRootDir
+task buildNpmApp(type: Exec) {
+    workingDir projectRootDir + '/purchase-list-ui/'
+    commandLine 'cmd', '/c', NPM_PATH + 'ng build -c aws'
+}
+
+task deployStaticToRemote {
+    dependsOn buildNpmApp
+    ssh.settings {
+        knownHosts = allowAnyHosts
+    }
+    doLast {
         ssh.run {
             session(remotes.webServer) {
                 execute 'sudo rm -rf /var/www/purchases'
@@ -103,10 +111,10 @@ task deployJarToRemote {
             }
         }
     }
+}
 
-    task deployAllToRemote {
-        dependsOn deployJarToRemote, deployStaticToRemote
-    }
+task deployAllToRemote {
+    dependsOn deployJarToRemote, deployStaticToRemote
 }
 
 
