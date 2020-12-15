@@ -11,80 +11,57 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * User
+ * PasswordUpdateHolder
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-12-14T10:37:43.484+03:00[Europe/Moscow]")
 
-public class User  implements Serializable {
+public class PasswordUpdateHolder  implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  @JsonProperty("username")
-  private String username;
+  @JsonProperty("oldPassword")
+  private String oldPassword;
 
-  @JsonProperty("fio")
-  private String fio;
+  @JsonProperty("newPassword")
+  private String newPassword;
 
-  @JsonProperty("apiKey")
-  private String apiKey;
-
-  public User username(String username) {
-    this.username = username;
+  public PasswordUpdateHolder oldPassword(String oldPassword) {
+    this.oldPassword = oldPassword;
     return this;
   }
 
   /**
-   * Get username
-   * @return username
+   * Get oldPassword
+   * @return oldPassword
   */
   @ApiModelProperty(value = "")
 
 
-  public String getUsername() {
-    return username;
+  public String getOldPassword() {
+    return oldPassword;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  public void setOldPassword(String oldPassword) {
+    this.oldPassword = oldPassword;
   }
 
-  public User fio(String fio) {
-    this.fio = fio;
+  public PasswordUpdateHolder newPassword(String newPassword) {
+    this.newPassword = newPassword;
     return this;
   }
 
   /**
-   * Get fio
-   * @return fio
+   * Get newPassword
+   * @return newPassword
   */
   @ApiModelProperty(value = "")
 
 
-  public String getFio() {
-    return fio;
+  public String getNewPassword() {
+    return newPassword;
   }
 
-  public void setFio(String fio) {
-    this.fio = fio;
-  }
-
-  public User apiKey(String apiKey) {
-    this.apiKey = apiKey;
-    return this;
-  }
-
-  /**
-   * Get apiKey
-   * @return apiKey
-  */
-  @ApiModelProperty(value = "")
-
-
-  public String getApiKey() {
-    return apiKey;
-  }
-
-  public void setApiKey(String apiKey) {
-    this.apiKey = apiKey;
+  public void setNewPassword(String newPassword) {
+    this.newPassword = newPassword;
   }
 
 
@@ -96,25 +73,23 @@ public class User  implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    User user = (User) o;
-    return Objects.equals(this.username, user.username) &&
-        Objects.equals(this.fio, user.fio) &&
-        Objects.equals(this.apiKey, user.apiKey);
+    PasswordUpdateHolder passwordUpdateHolder = (PasswordUpdateHolder) o;
+    return Objects.equals(this.oldPassword, passwordUpdateHolder.oldPassword) &&
+        Objects.equals(this.newPassword, passwordUpdateHolder.newPassword);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(username, fio, apiKey);
+    return Objects.hash(oldPassword, newPassword);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class User {\n");
+    sb.append("class PasswordUpdateHolder {\n");
     
-    sb.append("    username: ").append(toIndentedString(username)).append("\n");
-    sb.append("    fio: ").append(toIndentedString(fio)).append("\n");
-    sb.append("    apiKey: ").append(toIndentedString(apiKey)).append("\n");
+    sb.append("    oldPassword: ").append(toIndentedString(oldPassword)).append("\n");
+    sb.append("    newPassword: ").append(toIndentedString(newPassword)).append("\n");
     sb.append("}");
     return sb.toString();
   }

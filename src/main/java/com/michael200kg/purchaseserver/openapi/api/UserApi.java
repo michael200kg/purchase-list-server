@@ -5,6 +5,7 @@
  */
 package com.michael200kg.purchaseserver.openapi.api;
 
+import com.michael200kg.purchaseserver.openapi.dto.PasswordUpdateHolder;
 import com.michael200kg.purchaseserver.openapi.dto.User;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-12-10T00:58:51.890+03:00[Europe/Moscow]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-12-14T10:37:43.484+03:00[Europe/Moscow]")
 
 @Validated
 @Api(value = "User", description = "the User API")
@@ -52,6 +53,18 @@ public interface UserApi {
                 }
             }
         });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    @ApiOperation(value = "Update user password - disable with AD integration", nickname = "updatePassword", notes = "", tags={ "User", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Updated password") })
+    @RequestMapping(value = "/user/password",
+        consumes = { "application/json" },
+        method = RequestMethod.PUT)
+    default ResponseEntity<Void> updatePassword(@ApiParam(value = "" ,required=true )  @Valid @RequestBody PasswordUpdateHolder passwordUpdateHolder) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
