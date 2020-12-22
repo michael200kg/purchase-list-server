@@ -14,7 +14,7 @@ import javax.validation.constraints.*;
 /**
  * PurchaseItem
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-12-14T10:37:43.484+03:00[Europe/Moscow]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-12-21T22:56:32.865+03:00[Europe/Moscow]")
 
 public class PurchaseItem  implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -36,6 +36,9 @@ public class PurchaseItem  implements Serializable {
 
   @JsonProperty("itemDescription")
   private String itemDescription;
+
+  @JsonProperty("active")
+  private Boolean active;
 
   public PurchaseItem id(Integer id) {
     this.id = id;
@@ -158,6 +161,26 @@ public class PurchaseItem  implements Serializable {
     this.itemDescription = itemDescription;
   }
 
+  public PurchaseItem active(Boolean active) {
+    this.active = active;
+    return this;
+  }
+
+  /**
+   * Get active
+   * @return active
+  */
+  @ApiModelProperty(value = "")
+
+
+  public Boolean getActive() {
+    return active;
+  }
+
+  public void setActive(Boolean active) {
+    this.active = active;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -173,12 +196,13 @@ public class PurchaseItem  implements Serializable {
         Objects.equals(this.checked, purchaseItem.checked) &&
         Objects.equals(this.checkedDate, purchaseItem.checkedDate) &&
         Objects.equals(this.itemName, purchaseItem.itemName) &&
-        Objects.equals(this.itemDescription, purchaseItem.itemDescription);
+        Objects.equals(this.itemDescription, purchaseItem.itemDescription) &&
+        Objects.equals(this.active, purchaseItem.active);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, purchaseId, checked, checkedDate, itemName, itemDescription);
+    return Objects.hash(id, purchaseId, checked, checkedDate, itemName, itemDescription, active);
   }
 
   @Override
@@ -192,6 +216,7 @@ public class PurchaseItem  implements Serializable {
     sb.append("    checkedDate: ").append(toIndentedString(checkedDate)).append("\n");
     sb.append("    itemName: ").append(toIndentedString(itemName)).append("\n");
     sb.append("    itemDescription: ").append(toIndentedString(itemDescription)).append("\n");
+    sb.append("    active: ").append(toIndentedString(active)).append("\n");
     sb.append("}");
     return sb.toString();
   }

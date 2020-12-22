@@ -18,12 +18,15 @@ import org.springframework.web.client.HttpClientErrorException;
 import java.util.List;
 
 import static com.michael200kg.purchaseserver.constants.ApplicationConstants.SERVICE_PATH_PREFIX;
+import static java.util.Objects.isNull;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping(SERVICE_PATH_PREFIX)
 public class UserApiController implements UserApi {
+
+    private final static String DUMMY_PSWD = "password";
 
     private final UserRepository userRepository;
     private final UserModelConverter userModelConverter;
@@ -44,6 +47,16 @@ public class UserApiController implements UserApi {
     }
 
     @Override
+    public ResponseEntity<User> createUser(User user) {
+        userRepository.saveAndFlush(userModelConverter.dtoToEntity(user));
+        this.authService.updatePassword(
+                user.getUsername(),
+                passwordEncoder.encode(DUMMY_PSWD)
+        );
+        return ResponseEntity.ok(user);
+    }
+
+    @Override
     public ResponseEntity<User> updateUser(User user) {
         userRepository.saveAndFlush(userModelConverter.dtoToEntity(user));
         return ResponseEntity.ok(user);
@@ -58,12 +71,12 @@ public class UserApiController implements UserApi {
     @Override
     public ResponseEntity<Void> updatePassword(PasswordUpdateHolder passwordUpdateHolder) {
         String newPassword = passwordUpdateHolder.getNewPassword();
-//        if (newPassword.length() < 8) {
-//            throw new HttpClientErrorException(
-//                    BAD_REQUEST,
-//                    "Минимальная длина нового пароля 8 символов"
-//            );
-//        }
+        if (isNull(newPassword) || newPassword.isEmpty()) {
+            throw new HttpClientErrorException(
+                    BAD_REQUEST,
+                    "Новый пароль не должен быть пустым"
+            );
+        }
         String username = userAuthenticationService
                 .getCurrentUser()
                 .getUsername();

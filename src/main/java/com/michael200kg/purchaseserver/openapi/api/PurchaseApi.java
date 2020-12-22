@@ -26,7 +26,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-12-14T10:37:43.484+03:00[Europe/Moscow]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-12-21T22:56:32.865+03:00[Europe/Moscow]")
 
 @Validated
 @Api(value = "Purchase", description = "the Purchase API")
@@ -47,7 +47,7 @@ public interface PurchaseApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"shared\" : true, \"createdDate\" : \"2000-01-23T04:56:07.000+00:00\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"sharedForUsername\" : \"sharedForUsername\", \"name\" : \"name\", \"checked\" : true, \"id\" : 0, \"text\" : \"text\", \"items\" : [ { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" }, { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" } ], \"username\" : \"username\" }";
+                    String exampleString = "{ \"shared\" : true, \"createdDate\" : \"2000-01-23T04:56:07.000+00:00\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"sharedForUsername\" : \"sharedForUsername\", \"name\" : \"name\", \"checked\" : true, \"id\" : 0, \"text\" : \"text\", \"items\" : [ { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"active\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" }, { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"active\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" } ], \"username\" : \"username\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -61,7 +61,7 @@ public interface PurchaseApi {
     @ApiOperation(value = "Deletes existing Purchase", nickname = "deletePurchase", notes = "", tags={ "Purchase", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Deleted Purchase") })
-    @RequestMapping(value = "/purchase/{purchaseId}",
+    @RequestMapping(value = "/purchase/getPurchaseById",
         method = RequestMethod.DELETE)
     default ResponseEntity<Void> deletePurchase(@ApiParam(value = "Id of the Purchase",required=true) @PathVariable("purchaseId") Integer purchaseId) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
@@ -84,14 +84,14 @@ public interface PurchaseApi {
     @ApiOperation(value = "Get Purchase by id", nickname = "getPurchaseById", notes = "", response = Purchase.class, tags={ "Purchase", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Retrieved Purchase", response = Purchase.class) })
-    @RequestMapping(value = "/purchase/{purchaseId}",
+    @RequestMapping(value = "/purchase/getPurchaseById",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    default ResponseEntity<Purchase> getPurchaseById(@ApiParam(value = "Id of the Purchase",required=true) @PathVariable("purchaseId") Integer purchaseId) {
+    default ResponseEntity<Purchase> getPurchaseById(@NotNull @ApiParam(value = "Id of the Purchase", required = true) @Valid @RequestParam(value = "purchaseId", required = true) Integer purchaseId,@ApiParam(value = "Id of the Purchase") @Valid @RequestParam(value = "showAll", required = false) Boolean showAll) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"shared\" : true, \"createdDate\" : \"2000-01-23T04:56:07.000+00:00\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"sharedForUsername\" : \"sharedForUsername\", \"name\" : \"name\", \"checked\" : true, \"id\" : 0, \"text\" : \"text\", \"items\" : [ { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" }, { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" } ], \"username\" : \"username\" }";
+                    String exampleString = "{ \"shared\" : true, \"createdDate\" : \"2000-01-23T04:56:07.000+00:00\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"sharedForUsername\" : \"sharedForUsername\", \"name\" : \"name\", \"checked\" : true, \"id\" : 0, \"text\" : \"text\", \"items\" : [ { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"active\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" }, { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"active\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" } ], \"username\" : \"username\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -108,11 +108,11 @@ public interface PurchaseApi {
     @RequestMapping(value = "/purchase",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    default ResponseEntity<List<Purchase>> getPurchases() {
+    default ResponseEntity<List<Purchase>> getPurchases(@ApiParam(value = "Id of the Purchase") @Valid @RequestParam(value = "showAll", required = false) Boolean showAll) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"shared\" : true, \"createdDate\" : \"2000-01-23T04:56:07.000+00:00\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"sharedForUsername\" : \"sharedForUsername\", \"name\" : \"name\", \"checked\" : true, \"id\" : 0, \"text\" : \"text\", \"items\" : [ { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" }, { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" } ], \"username\" : \"username\" }";
+                    String exampleString = "{ \"shared\" : true, \"createdDate\" : \"2000-01-23T04:56:07.000+00:00\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"sharedForUsername\" : \"sharedForUsername\", \"name\" : \"name\", \"checked\" : true, \"id\" : 0, \"text\" : \"text\", \"items\" : [ { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"active\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" }, { \"itemName\" : \"itemName\", \"checkedDate\" : \"2000-01-23T04:56:07.000+00:00\", \"purchaseId\" : 1, \"checked\" : true, \"active\" : true, \"id\" : 6, \"itemDescription\" : \"itemDescription\" } ], \"username\" : \"username\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

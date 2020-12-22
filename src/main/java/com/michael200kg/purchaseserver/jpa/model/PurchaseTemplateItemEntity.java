@@ -4,25 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
-import java.time.OffsetDateTime;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
 @Entity
-public class PurchaseItemEntity {
+public class PurchaseTemplateItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer purchaseId;
-    private Boolean checked;
-    private OffsetDateTime checkedDate;
+    private Integer purchaseTemplateId;
     private String itemName;
     private String itemDescription;
-    private Boolean active;
 }
-

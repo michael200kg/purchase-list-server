@@ -27,7 +27,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-12-14T10:37:43.484+03:00[Europe/Moscow]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-12-21T22:56:32.865+03:00[Europe/Moscow]")
 
 @Validated
 @Api(value = "User", description = "the User API")
@@ -36,6 +36,28 @@ public interface UserApi {
     default Optional<NativeWebRequest> getRequest() {
         return Optional.empty();
     }
+
+    @ApiOperation(value = "Create user", nickname = "createUser", notes = "", response = User.class, tags={ "User", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Edited Purchase", response = User.class) })
+    @RequestMapping(value = "/user",
+        produces = { "application/json" }, 
+        consumes = { "application/json" },
+        method = RequestMethod.POST)
+    default ResponseEntity<User> createUser(@ApiParam(value = "User"  )  @Valid @RequestBody User user) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"apiKey\" : \"apiKey\", \"fio\" : \"fio\", \"username\" : \"username\" }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
 
     @ApiOperation(value = "Get list of all Users", nickname = "getUsers", notes = "", response = User.class, responseContainer = "List", tags={ "User", })
     @ApiResponses(value = { 
